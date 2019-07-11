@@ -1,0 +1,13 @@
+[
+  {
+    "name": "EmailDemoPlugin",
+    "version": "0.0.0",
+    "class": "EmailDemoPlugin",
+    "requires": [
+      {
+        "@twilio/flex-ui": "^1"
+      }
+    ],
+    "src": "http://localhost:8080/plugin-email-demo.js"
+  }
+]
