@@ -4,8 +4,6 @@ import { Global, jsx, css } from '@emotion/core';
 import axios from 'axios';
 import _ from 'lodash';
 import Root from "react-shade";
-import CKEditor from '@ckeditor/ckeditor5-react';
-import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 import { IconContext } from 'react-icons';
 import { MdSend } from 'react-icons/md';
 
@@ -60,6 +58,7 @@ export default class EmailTaskCanvas extends React.Component {
       .then(() => {
         console.log('Message Sent');
         self.setState({response: ''});
+        task.complete();
       })
       .catch(err => console.error(err)); // eslint-disable-line
   }
@@ -114,14 +113,16 @@ export default class EmailTaskCanvas extends React.Component {
             border-color: rgb(96, 100, 113);
           `}
         >
-          <CKEditor
-            editor={ InlineEditor }
-            data={ response }
-            onChange={ ( event, editor ) => {
-                const data = editor.getData();
-                // console.log( { event, editor, data } );
-                this.updateResponse(data);
+          <textarea
+            rows={5}
+            cols={50}
+            value={ response }
+            onChange={ ( event ) => {
+                this.updateResponse(event.target.value);
             } }
+            css={css`
+              resize: none;
+            `}
           />
           <button
             css={css`
